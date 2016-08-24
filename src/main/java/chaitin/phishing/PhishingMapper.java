@@ -1,21 +1,21 @@
-package chaitin.webshell;
+package chaitin.phishing;
 
 import java.io.IOException;
 
 import com.aliyun.odps.data.Record;
+import com.aliyun.odps.mapred.Mapper;
 import com.aliyun.odps.mapred.Mapper.TaskContext;
 
-public class PhishingMapper {
+public class PhishingMapper implements Mapper {
     public void setup(TaskContext context) throws IOException {
     }
 
     public void map(long recordNum, Record record, TaskContext context) throws IOException {
-        String id = (String) record.get(0);
-        String uri = (String) record.get(1);
-        String data = (String) record.get(2);
+        String url = (String) record.get(0);
+        String html = (String) record.get(1);
         if (true) {
         	Record result = context.createOutputRecord();
-        	result.set("id", id);
+        	result.set("url", url);
             context.write(result);
         }
     }
