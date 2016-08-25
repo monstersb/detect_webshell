@@ -7,25 +7,40 @@ import chaitin.webshell.decoder.QueryString;
 
 public class WebshellDetector {
 	
+    public static boolean isSensitiveKey(byte[] key) {
+    	
+		String k = new String(key);
+		
+		return  ("z0".equals(k) || "cd".equals(k) || "hk715".equals(k) || "mb".equals(k));
+	}
 	
-	public static boolean isWebshell(String input) {
+    public static boolean isWebShellCode(byte[] value) {
+    	return WebshellScorer.phpScore(new String(value)) > 1e-9;
+	}
+    
+	public static boolean isWebshell(String uri, String data) {
 		
-		List<Pair> plist = QueryString.query_string(input.getBytes());
-		for (Pair p : plist) {
-			if ("z0".equals(new String(p.first))) {
-				return true;
-			}
-			
-			if (WebshellScorer.phpScore(new String(p.second)) > 1e-9) {
-				//return true;
-			}
-		}
-		
+    	List<Pair<byte[], byte[]>> plist = QueryString.query_string(data.getBytes());
+    	
+    	for (Pair<byte[], byte[]> p : plist) {
+    		if (isSensitiveKey(p.first) || isWebShellCode(p.second)) {
+    			return true;
+    		}
+    	}
+    	
+    	plist = QueryString.query_string(uri.getBytes());
+    	
+    	for (Pair<byte[], byte[]> p : plist) {
+    		if (isSensitiveKey(p.first) || isWebShellCode(p.second)) {
+    			return true;
+    		}
+    	}
+    	
 		return false;
 	}
 
 	public static void main(String[] args) {
-		System.out.println(isWebshell("echo $a;"));
+		System.out.println(isWebShellCode("echo $a;".getBytes()));
 	}
 
 }

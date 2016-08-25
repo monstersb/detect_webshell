@@ -50,7 +50,7 @@ public class MongoService {
 			}
 			
 			long d_res = 0;
-			if (WebshellDetector.isWebshell(urlpath) || WebshellDetector.isWebshell(body)) {
+			if (WebshellDetector.isWebshell(urlpath, body)) {
 				d_res = (1 << 8);
 				detected++;
 			}

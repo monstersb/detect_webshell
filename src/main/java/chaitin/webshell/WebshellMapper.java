@@ -28,23 +28,13 @@ public class WebshellMapper implements Mapper {
     public void setup(TaskContext context) throws IOException {
     }
     
-    public static boolean isWebShell(String uri, String data) {
-    	List<Pair<byte[], byte[]>> plist = QueryString.query_string(data.getBytes());
-    	for (Pair<byte[], byte[]> p : plist) {
-    		if ("z0".equals(new String(p.first))) {
-    			return true;
-    		}
-    	}
-
-		return false;
-	}
 
 	public void map(long recordNum, Record record, TaskContext context) throws IOException {
 		String id = (String) record.get(0);
 		String uri = (String) record.get(1);
 		String data = (String) record.get(2);
 
-		if (WebshellDetector.isWebshell(data)) {
+		if (WebshellDetector.isWebshell(uri, data)) {
 			Record result = context.createOutputRecord();
 			result.set("id", id);
 			context.write(result);
@@ -76,7 +66,7 @@ public class WebshellMapper implements Mapper {
 			int line = 1;
 			while ((tempString = reader.readLine()) != null) {
 				byte[] ds = Unquote.unquote(tempString.getBytes());
-				if (WebshellDetector.isWebshell(new String(ds))) {
+				if (WebshellDetector.isWebshell(new String(ds), "")) {
 					
 				} else {
 					System.out.println("line " + line + ": " + new String(ds));
