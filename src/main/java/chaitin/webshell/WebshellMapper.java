@@ -66,10 +66,12 @@ public class WebshellMapper implements Mapper {
 			int line = 1;
 			while ((tempString = reader.readLine()) != null) {
 				byte[] ds = Unquote.unquote(tempString.getBytes());
+				System.out.println("line " + line + ": " + new String(ds));
+				
 				if (WebshellDetector.isWebshell(new String(ds), "")) {
 					
 				} else {
-					System.out.println("line " + line + ": " + new String(ds));
+					// System.out.println("line " + line + ": " + new String(ds));
 				}
 				line++;
 			}
