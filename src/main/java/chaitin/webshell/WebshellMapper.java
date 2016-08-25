@@ -16,8 +16,8 @@ public class WebshellMapper implements Mapper {
     }
     
     public static boolean isWebShell(String uri, String data) {
-    	List<Pair> plist = QueryString.query_string(data.getBytes());
-    	for (Pair p : plist) {
+    	List<Pair<byte[], byte[]>> plist = QueryString.query_string(data.getBytes());
+    	for (Pair<byte[], byte[]> p : plist) {
     		if ("z0".equals(new String(p.first))) {
     			return true;
     		}

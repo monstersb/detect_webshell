@@ -1,25 +1,18 @@
 package chaitin.webshell.decoder;
 
-public class Pair {
+public class Pair<T1, T2> {
 	
-	public byte[] first;
-	public byte[] second;
+	public T1 first;
+	public T2 second;
 
 	
 	public Pair() {
 		super();
 	}
 
-	public Pair(byte[] first, byte[] second) {
+	public Pair(T1 first, T2 second) {
 		super();
 		this.first = first;
 		this.second = second;
 	}
-
-
-
-	public static void main(String[] args) {
-
-	}
-
 }
