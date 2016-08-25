@@ -11,7 +11,7 @@ public class Unquote extends Decoder {
         return result;
     }
 
-    static byte[] unquote(byte[] input) {
+    public static byte[] unquote(byte[] input) {
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         int pos = 0;
         while (pos < input.length) {
