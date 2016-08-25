@@ -20,6 +20,7 @@ import at.ac.tuwien.infosys.www.phpparser.PhpParser;
 
 import chaitin.webshell.decoder.Pair;
 import chaitin.webshell.decoder.QueryString;
+import chaitin.webshell.decoder.Unquote;
 import java_cup.runtime.Symbol;
 
 public class WebshellMapper implements Mapper {
@@ -74,16 +75,11 @@ public class WebshellMapper implements Mapper {
 			String tempString = null;
 			int line = 1;
 			while ((tempString = reader.readLine()) != null) {
-				String ds = "";
-				try {
-					ds = URLDecoder.decode(tempString, "UTF-8");
-				} catch (Exception e) {
-					ds = URLDecoder.decode(tempString + "3b", "UTF-8");
-				}
-				if (WebshellDetector.isWebshell(ds)) {
-					System.out.println("line " + line + ": " + ds);
+				byte[] ds = Unquote.unquote(tempString.getBytes());
+				if (WebshellDetector.isWebshell(new String(ds))) {
+					
 				} else {
-					System.out.println("line " + line + ": " + ds);
+					System.out.println("line " + line + ": " + new String(ds));
 				}
 				line++;
 			}

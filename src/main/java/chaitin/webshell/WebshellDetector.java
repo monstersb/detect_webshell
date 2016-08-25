@@ -13,11 +13,11 @@ public class WebshellDetector {
 		List<Pair> plist = QueryString.query_string(input.getBytes());
 		for (Pair p : plist) {
 			if ("z0".equals(new String(p.first))) {
-				// return true;
+				return true;
 			}
 			
 			if (WebshellScorer.phpScore(new String(p.second)) > 1e-9) {
-				return true;
+				//return true;
 			}
 		}
 		
