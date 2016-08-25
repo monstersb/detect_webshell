@@ -11,22 +11,29 @@ public class WebshellTokenizer {
 	private static final String separators = "[`~!@#$%^&*()+=\\-{}\\[\\]|\\:;\"<>',.?/\\\\ \n\r\t]";
 	
 	private static final HashMap tokenScore = new HashMap() {{ 
-		put("eval", 2); 
-		put("array_map", 2); 
 		put("array", 2); 
+		put("array_map", 2); 
+		put("base64_decode", 2); 
+		put("catch", 1); 
+		put("classLoader", 3); 
+		put("display_errors", 2); 
 		put("echo", 2); 
-		put("_post", 1); 
-		put("base64_decode", 1); 
-		put("response", 2); 
-		put("write", 1); 
+		put("encoding", 2); 
+		put("eval", 3); 
 		put("exception", 2); 
-		put("try", 1); 
-		put("write", 1); 
-		put("catch", 2); 
-		put("system", 2); 
+		put("execute", 2); 
 		put("frombase64string", 2); 
 		put("getencoding", 2); 
-		put("encoding", 2); 
+		put("ini_set", 2); 
+		put("md5", 1); 
+		put("phpinfo", 3); 
+		put("println", 2); 
+		put("response", 2); 
+		put("set_ti", 2); 
+		put("system", 2); 
+		put("try", 1); 
+		put("write", 1); 
+		put("_post", 1); 
 	}};
 	
 	public static int scoreTokens(String input) {
@@ -39,6 +46,7 @@ public class WebshellTokenizer {
 		String[] tokens = input.split(separators);
 		
 		for (int i = 0; i < tokens.length; i++) {
+			tokens[i] = tokens[i].toLowerCase();
 			if (!used.contains(tokens[i]) && tokenScore.containsKey(tokens[i])) {
 				score += (Integer)tokenScore.get(tokens[i]);
 				used.add(tokens[i]);
@@ -72,6 +80,9 @@ public class WebshellTokenizer {
 		} catch (Exception e) {
 			System.out.println("error");
 		}
+		
+		System.out.println("AbcDEF".toLowerCase());
+		System.out.println(webShellScore("hk715=Execute++++++++++++++++++++++++++++++(\"++++++++++++++++++++++++++++++Execute++++++++++++++++++++++++++++++(\"\"++++++++++:Function+bd(byVal+s):For+i=1+To+Len(s)+Step+2:c=Mid(s,i,2):If+IsNumeric(Mid(s,i,1))+Then:Execute(\"\"\"\"bd=bd&chr(&H\"\"\"\"&c&\"\"\"\")\"\"\"\"):Else:Execute(\"\"\"\"bd=bd&chr(&H\"\"\"\"&c&Mid(s,i+2,2)&\"\"\"\")\"\"\"\"):i=i+2:End+If\"\"&chr(10)&\"\"Next:End+Function:Response.Write(\"\"\"\"->|\"\"\"\"):+++++++++++++++++"));
 
 	}
 }

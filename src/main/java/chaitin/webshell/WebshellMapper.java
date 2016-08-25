@@ -58,33 +58,5 @@ public class WebshellMapper implements Mapper {
 
 	public static void main(String[] args) throws Exception {
 
-		File file = new File("/Users/araleii/src/ali/ali_webshell.data");
-		BufferedReader reader = null;
-		try {
-			reader = new BufferedReader(new FileReader(file));
-			String tempString = null;
-			int line = 1;
-			while ((tempString = reader.readLine()) != null) {
-				byte[] ds = Unquote.unquote(tempString.getBytes());
-				System.out.println("line " + line + ": " + new String(ds));
-				
-				if (WebshellDetector.isWebshell(new String(ds), "")) {
-					
-				} else {
-					// System.out.println("line " + line + ": " + new String(ds));
-				}
-				line++;
-			}
-			reader.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			if (reader != null) {
-				try {
-					reader.close();
-				} catch (IOException e1) {
-				}
-			}
-		}
 	}
 }
