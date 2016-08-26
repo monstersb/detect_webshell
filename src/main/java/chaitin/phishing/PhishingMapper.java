@@ -24,15 +24,14 @@ public class PhishingMapper implements Mapper {
 		malice_keyword = new LinkedList<Pair<String, String[]>>();
 		malice_keyword.add(new Pair<String, String[]>("欢迎光临京东商城", new String[]{"jd.com", "360buy.com"}));
 		malice_title = new LinkedList<Pair<String, String[]>>();
-		malice_title.add(new Pair<String, String[]>("中国移动", new String[]{"10086.cn"}));
-		malice_title.add(new Pair<String, String[]>("中国联通", new String[]{"10010.com"}));
-		malice_title.add(new Pair<String, String[]>("京东商城", new String[]{"jd.com", "360buy.com"}));
-		malice_title.add(new Pair<String, String[]>("淘宝", new String[]{"alibaba.com", "alipay.com", "tmall.com", "taobao.com"}));
-		malice_title.add(new Pair<String, String[]>("支付宝", new String[]{"alibaba.com", "alipay.com", "tmall.com", "taobao.com"}));
-		malice_title.add(new Pair<String, String[]>("天猫", new String[]{"alibaba.com", "alipay.com", "tmall.com", "taobao.com"}));
-		malice_title.add(new Pair<String, String[]>("QQ空间", new String[]{"qq.com"}));
-		malice_title.add(new Pair<String, String[]>("平安银行", new String[]{"pingan.com"}));
-		malice_title.add(new Pair<String, String[]>("平安科技", new String[]{"pingan.com"}));
+		malice_title.add(new Pair<String, String[]>("中国移动官方网站", new String[]{"10086.cn"}));
+		malice_title.add(new Pair<String, String[]>("中国联通网上营业厅", new String[]{"10010.com"}));
+		malice_title.add(new Pair<String, String[]>("京东(JD.COM)-", new String[]{"jd.com", "360buy.com"}));
+		malice_title.add(new Pair<String, String[]>("淘宝网 - ", new String[]{"alibaba.com", "alipay.com", "tmall.com", "taobao.com"}));
+		malice_title.add(new Pair<String, String[]>("登录 - 支付宝", new String[]{"alibaba.com", "alipay.com", "tmall.com", "taobao.com"}));
+		//malice_title.add(new Pair<String, String[]>("天猫", new String[]{"alibaba.com", "alipay.com", "tmall.com", "taobao.com"}));
+		malice_title.add(new Pair<String, String[]>("QQ空间-", new String[]{"qq.com"}));
+		malice_title.add(new Pair<String, String[]>("中国平安官网", new String[]{"pingan.com"}));
 		malice_title.add(new Pair<String, String[]>("浦发银行", new String[]{"spdb.com.cn"}));
 		malice_title.add(new Pair<String, String[]>("中国工商银行", new String[]{"icbc.com.cn"}));
 		malice_title.add(new Pair<String, String[]>("广发银行银行", new String[]{"cgbchina.com.cn"}));
@@ -40,16 +39,16 @@ public class PhishingMapper implements Mapper {
 		malice_title.add(new Pair<String, String[]>("民生银行", new String[]{"cmbc.com.cn"}));
 		malice_title.add(new Pair<String, String[]>("建设银行", new String[]{"ccb.com"}));
 		malice_title.add(new Pair<String, String[]>("中国银行", new String[]{"bankofchina.com"}));
-		malice_title.add(new Pair<String, String[]>("中国电信", new String[]{"189.cn"}));
-		malice_title.add(new Pair<String, String[]>("优购", new String[]{"yougou.com"}));
-		malice_title.add(new Pair<String, String[]>("易迅", new String[]{"yixun.com"}));
-		malice_title.add(new Pair<String, String[]>("国美", new String[]{"gome.com.cn"}));
-		malice_title.add(new Pair<String, String[]>("58同城", new String[]{"58.com"}));
-		malice_title.add(new Pair<String, String[]>("苏宁易购", new String[]{"suning.com"}));
-		malice_title.add(new Pair<String, String[]>("拉手网团购", new String[]{"lashou.com"}));
-		malice_title.add(new Pair<String, String[]>("当当网", new String[]{"dangdang.com"}));
-		malice_title.add(new Pair<String, String[]>("聚美优品", new String[]{"jumei.com"}));
-		malice_title.add(new Pair<String, String[]>("新浪微博", new String[]{"weibo.com"}));
+		malice_title.add(new Pair<String, String[]>("-综合运营商网上营业厅-官方认证、正品低价、品质保障、新品首发、放心购物、轻松服务", new String[]{"189.cn"}));
+		malice_title.add(new Pair<String, String[]>("优购时尚商城-", new String[]{"yougou.com"}));
+		malice_title.add(new Pair<String, String[]>("易迅网-", new String[]{"yixun.com"}));
+		malice_title.add(new Pair<String, String[]>("国美在线(GOME)-", new String[]{"gome.com.cn"}));
+		malice_title.add(new Pair<String, String[]>("【58同城 58.com】", new String[]{"58.com"}));
+		malice_title.add(new Pair<String, String[]>("苏宁易购(Suning) -", new String[]{"suning.com"}));
+		malice_title.add(new Pair<String, String[]>("【拉手网】", new String[]{"lashou.com"}));
+		malice_title.add(new Pair<String, String[]>("当当—网上购物中心", new String[]{"dangdang.com"}));
+		malice_title.add(new Pair<String, String[]>("聚美优品 -", new String[]{"jumei.com"}));
+		malice_title.add(new Pair<String, String[]>("微博-随时随地发现新鲜事", new String[]{"weibo.com"}));
 	}
 	
     public void setup(TaskContext context) throws IOException {
