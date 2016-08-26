@@ -12,7 +12,7 @@ public class WebshellDetector {
     	
 		String k = new String(key);
 		
-		return false && ("z0".equals(k));// || "cd".equals(k) || "hk715".equals(k) || "mb".equals(k));
+		return ("z0".equals(k) || "hk715".equals(k));
 	}
 	
 	public static boolean isWebshell(String uri, String data) {

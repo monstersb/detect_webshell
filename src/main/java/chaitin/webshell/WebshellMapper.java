@@ -5,27 +5,19 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.net.URLDecoder;
-import java.util.Iterator;
-import java.util.List;
 
 import com.aliyun.odps.data.Record;
 import com.aliyun.odps.mapred.Mapper;
 import com.aliyun.odps.mapred.TaskContext;
 
-import at.ac.tuwien.infosys.www.phpparser.ParseNode;
-import at.ac.tuwien.infosys.www.phpparser.ParseTree;
-import at.ac.tuwien.infosys.www.phpparser.PhpLexer;
-import at.ac.tuwien.infosys.www.phpparser.PhpParser;
-
 import chaitin.webshell.decoder.Pair;
 import chaitin.webshell.decoder.QueryString;
 import chaitin.webshell.decoder.Unquote;
-import java_cup.runtime.Symbol;
 
 public class WebshellMapper implements Mapper {
 
     public void setup(TaskContext context) throws IOException {
+    	
     }
     
 
@@ -45,16 +37,6 @@ public class WebshellMapper implements Mapper {
 
 	}
 
-	public static void show(ParseNode pn) {
-
-		if (pn.getNumChildren() == 0) {
-			System.out.print(pn.getName() + " ");
-		} else {
-			for (ParseNode p : pn.getChildren()) {
-				show(p);
-			}
-		}
-	}
 
 	public static void main(String[] args) throws Exception {
 
