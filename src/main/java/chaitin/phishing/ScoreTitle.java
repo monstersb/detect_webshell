@@ -56,6 +56,9 @@ public class ScoreTitle {
 		sensitive_word.add(new Pair<String, Double>("[官]欢迎访问全国信用在线申请中心", 15.0));
 		sensitive_word.add(new Pair<String, Double>("登录", 2.0));
 		sensitive_word.add(new Pair<String, Double>("登陆", 3.0));
+		sensitive_word.add(new Pair<String, Double>("中奖", 2.0));
+		sensitive_word.add(new Pair<String, Double>("抽奖", 2.0));
+		sensitive_word.add(new Pair<String, Double>("信用", 2.0));
 	}
 
 	public static double score(String title) {

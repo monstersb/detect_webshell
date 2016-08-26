@@ -29,6 +29,9 @@ public class ScoreDomain {
 		double result = 0.0;
 		host = host.toLowerCase();
 		if (!is_white(host)) {
+			if (host.length() > 20) {
+				result += (host.length() - 20) * 0.1;
+			}
 			for (String s: whilte_list) {
 				int p = host.indexOf(s);
 				if (p > 1 && (host.charAt(p - 1) == '.' || host.charAt(p - 1) == '-')) {

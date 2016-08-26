@@ -19,9 +19,9 @@ public class ScoreForm {
 		sensitive_action.add(new Pair<Pattern, Double>(Pattern.compile(".*diaoyu.*"), 5.0));
 		sensitive_action.add(new Pair<Pattern, Double>(Pattern.compile(".*\\.asp.*"), 2.0));
 		sensitive_form_word = new LinkedList<Pair<Pattern, Double>>();
-		sensitive_form_word.add(new Pair<Pattern, Double>(Pattern.compile(".*身份证.*"), 4.0));
-		sensitive_form_word.add(new Pair<Pattern, Double>(Pattern.compile(".*额度.*"), 4.0));
-		sensitive_form_word.add(new Pair<Pattern, Double>(Pattern.compile(".*手机号.*"), 2.0));
+		sensitive_form_word.add(new Pair<Pattern, Double>(Pattern.compile(".*身份证.*"), 3.0));
+		sensitive_form_word.add(new Pair<Pattern, Double>(Pattern.compile(".*额度.*"), 3.0));
+		sensitive_form_word.add(new Pair<Pattern, Double>(Pattern.compile(".*手机号.*"), 1.0));
 	}
 	
 	public static double scoce_action(String action) {
