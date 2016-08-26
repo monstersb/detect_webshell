@@ -14,6 +14,7 @@ public class HtmlParser {
 			public String placeholder;
 		}
 		public String action;
+		public String text;
 		public Input[] input;
 	}
 	
@@ -42,13 +43,14 @@ public class HtmlParser {
 		for (int i = 0; i < es.size(); ++i) {
 			Element e = es.get(i);
 			Form f = new Form();
-			f.action = e.attr("action");
+			f.action = e.attr("action").toLowerCase();
+			f.text = e.text();
 			Elements es1 = e.getElementsByTag("input");
 			f.input = new Form.Input[es1.size()];
 			for (int j = 0; j < es1.size(); ++j) {
 				Form.Input input = new Form.Input();
 				Element e1 = es1.get(j);
-				input.type = e1.attr("type");
+				input.type = e1.attr("type").toLowerCase();
 				input.name = e1.attr("name");
 				input.id = e1.attr("id");
 				input.placeholder = e1.attr("placeholder");
