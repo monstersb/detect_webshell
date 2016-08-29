@@ -35,10 +35,18 @@ public class WebshellDetector {
     	if (uri.length() > 1) {
 	    	plist = QueryString.query_string(uri.getBytes());
 	    	for (Pair<byte[], byte[]> p : plist) {
-	    		if (isSensitiveKey(Unquote.unquote(p.first))) {
+	    		
+	    		byte[] byte_key = Unquote.unquote(p.first);
+	    		String key = new String(byte_key);
+	    		String value = new String(Unquote.unquote(p.second));
+	    		
+	    		if (isSensitiveKey(byte_key)) {
 	    			return true;
 	    		}
-	    		if (WebshellTokenizer.webShellScore(new String(Unquote.unquote(p.second))) >= 3) {
+	    		if (WebshellTokenizer.webShellScore(key) >= 3) {
+	    			return true;
+	    		}
+	    		if (WebshellTokenizer.webShellScore(value) >= 3) {
 	    			return true;
 	    		}
 	    	}
@@ -53,6 +61,7 @@ public class WebshellDetector {
     		System.out.println(new String(p.first));
     		System.out.println(new String(p.second));
     	}
+    	System.out.println(isWebshell("", ""));
 	}
 
 }

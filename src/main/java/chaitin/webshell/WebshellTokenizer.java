@@ -10,7 +10,10 @@ public class WebshellTokenizer {
 	// no _
 	private static final String separators = "[`~!@#$%^&*()+=\\-{}\\[\\]|\\:;\"<>',.?/\\\\ \n\r\t]";
 	
-	private static final HashMap tokenScore = new HashMap() {{ 
+	private static final HashMap<String, Integer> tokenScore = new HashMap<String, Integer>() {
+		private static final long serialVersionUID = 5401942617951940220L;
+	{ 
+		put("allowstaticmethodaccess", 1); 
 		put("array", 1); 
 		put("array_map", 2); 
 		put("base64_decode", 2); 
@@ -20,20 +23,23 @@ public class WebshellTokenizer {
 		put("encoding", 2); 
 		put("eval", 2); 
 		put("exception", 2); 
-		put("execute", 2); 
+		put("execute", 1); 
+		put("exit", 1); 
 		put("frombase64string", 2); 
 		put("getencoding", 2); 
+		put("getrequest", 2); 
+		put("getwriter", 2); 
 		put("ini_set", 2); 
 		put("md5", 1); 
-		put("phpinfo", 3); 
+		put("phpinfo", 2); 
 		put("println", 2); 
 		put("response", 1); 
-		put("system", 2); 
+		put("servletactioncontext", 1); 
+		put("system", 1); 
 		//put("try", 1); 
 		//put("write", 1); 
 		put("_post", 1); 
 		put("methodaccessor", 1); 
-		put("allowstaticmethodaccess", 1); 
 	}};
 	
 	public static int scoreTokens(String input) {
@@ -85,7 +91,8 @@ public class WebshellTokenizer {
 		}
 		
 		System.out.println("AbcDEF".toLowerCase());
-		System.out.println(webShellScore("hk715=Execute++++++++++++++++++++++++++++++(\"++++++++++++++++++++++++++++++Execute++++++++++++++++++++++++++++++(\"\"++++++++++:Function+bd(byVal+s):For+i=1+To+Len(s)+Step+2:c=Mid(s,i,2):If+IsNumeric(Mid(s,i,1))+Then:Execute(\"\"\"\"bd=bd&chr(&H\"\"\"\"&c&\"\"\"\")\"\"\"\"):Else:Execute(\"\"\"\"bd=bd&chr(&H\"\"\"\"&c&Mid(s,i+2,2)&\"\"\"\")\"\"\"\"):i=i+2:End+If\"\"&chr(10)&\"\"Next:End+Function:Response.Write(\"\"\"\"->|\"\"\"\"):+++++++++++++++++"));
+		String ts = "";
+		System.out.println(webShellScore(ts));
 
 	}
 }
