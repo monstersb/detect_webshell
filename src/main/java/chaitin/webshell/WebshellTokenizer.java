@@ -3,7 +3,9 @@ package chaitin.webshell;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class WebshellTokenizer {
 	
@@ -18,6 +20,8 @@ public class WebshellTokenizer {
 		put("array_map", 2); 
 		put("base64_decode", 2); 
 		put("catch", 1); 
+		put("chr", 1); 
+		put("create_function", 1); 
 		put("display_errors", 2); 
 		put("echo", 1); 
 		put("encoding", 2); 
@@ -27,21 +31,58 @@ public class WebshellTokenizer {
 		put("exit", 1); 
 		put("frombase64string", 2); 
 		put("getencoding", 2); 
+		put("getinputstream", 2); 
 		put("getrequest", 2); 
 		put("getwriter", 2); 
+		put("gzinflate", 2); 
 		put("ini_set", 2); 
+		put("isnumeri", 2); 
 		put("md5", 1); 
 		put("phpinfo", 2); 
+		put("preg_replace", 2); 
 		put("println", 2); 
 		put("response", 1); 
 		put("servletactioncontext", 1); 
+		put("streamconnector", 1); 
 		put("system", 1); 
 		//put("try", 1); 
-		//put("write", 1); 
-		put("_post", 1); 
+		put("write", 1); 
 		put("methodaccessor", 1); 
+		put("_cookie", 1); 
+		put("_get", 1);
+		put("_post", 1); 
+		put("_request", 1); 
+		put("_server", 1); 
 	}};
 	
+	private static final HashMap<String, Integer> dangerousTokenScore = new HashMap<String, Integer>() {
+		private static final long serialVersionUID = 4464369449273331205L;
+	{ 
+		put("allowstaticmethodaccess", 1); 
+		put("base64_decode", 2); 
+		put("create_function", 1); 
+		put("display_errors", 2); 
+		put("eval", 2); 
+		put("frombase64string", 2); 
+		put("getencoding", 2); 
+		put("getinputstream", 2); 
+		put("getrequest", 2); 
+		put("getwriter", 2); 
+		put("gzinflate", 2); 
+		put("ini_set", 2); 
+		put("isnumeri", 2); 
+		put("preg_replace", 2); 
+		put("response", 1); 
+		put("servletactioncontext", 1); 
+		put("streamconnector", 1); 
+		//put("try", 1); 
+		put("methodaccessor", 1); 
+		put("_cookie", 2); 
+		put("_get", 2);
+		put("_post", 2); 
+		put("_request", 2); 
+		put("_server", 2); 
+	}};
 	public static int scoreTokens(String input) {
 		
 		HashSet<String> used = new HashSet<String>();
@@ -58,7 +99,21 @@ public class WebshellTokenizer {
 				used.add(tokens[i]);
 			}
 		}
-		return score;
+		
+		// Next is merge score.
+		int mergeScore = 0;
+		String mergeString = String.join("", tokens);
+		
+		Iterator<Entry<String, Integer>> iter = dangerousTokenScore.entrySet().iterator();
+		while (iter.hasNext()) {
+			Map.Entry entry = (Map.Entry) iter.next();
+			String key = (String)entry.getKey();
+			int val = (Integer)entry.getValue();
+			if (mergeString.indexOf(key) >= 0) {
+				mergeScore += val;
+			}
+		}
+		return Math.max(score, mergeScore);
 	}
 	
 	public static int webShellScore(String input) {
@@ -93,6 +148,19 @@ public class WebshellTokenizer {
 		System.out.println("AbcDEF".toLowerCase());
 		String ts = "";
 		System.out.println(webShellScore(ts));
-
+		
+		String ss[] = new String[]{"abc", "123", "*(*()"};
+		System.out.println(String.join("", ss));
+		
+		Iterator iter = tokenScore.entrySet().iterator();
+		while (iter.hasNext()) {
+			Map.Entry entry = (Map.Entry) iter.next();
+			String key = (String)entry.getKey();
+			int val = (Integer)entry.getValue();
+			System.out.println(key + " " + val);
+		}
+		
+		ts = "array_map(\"ass\".\"ert\",array(\"ev\".\"Al(\\\"\\\\\\$xx%3D\\\\\\\"Ba\".\"SE6\".\"4_dEc\"";
+		System.out.println(scoreTokens(ts));
 	}
 }
