@@ -18,11 +18,22 @@ public class HtmlParser {
 		public Input[] input;
 	}
 	
+	public static class Link {
+		public String rel;
+		public String href;
+	}
+	
+	public static class A {
+		public String href;
+	}
+	
 	String html;
 	Document doc;
 	public String text;
 	public String title;
 	public Form form[];
+	public Link link[];
+	public A a[];
 	
 	public HtmlParser (String _html) {
 		html = _html;
@@ -58,6 +69,24 @@ public class HtmlParser {
 			}
 			form[i] = f;
 		}
+		
+		es = doc.getElementsByTag("link");
+		link = new Link[es.size()];
+		for (int i = 0; i < es.size(); ++i) {
+			link[i] = new Link();
+			Element e = es.get(i);
+			link[i].rel = e.attr("rel").toLowerCase();
+			link[i].href = e.attr("href").toLowerCase();
+		}
+		
+		es = doc.getElementsByTag("a");
+		a = new A[es.size()];
+		for (int i = 0; i < es.size(); ++i) {
+			a[i] = new A();
+			Element e = es.get(i);
+			a[i].href = e.attr("href").toLowerCase();
+		}
+		
 		return true;
 	}
 
@@ -71,6 +100,20 @@ public class HtmlParser {
    		System.out.println(new HtmlParser("<form action='http://阿萨德'></form>").form[0].action);
    		System.out.println("id: " + new HtmlParser("<form action='http://阿萨德'><input type=text /></form>").form[0].input[0].id);
    		System.out.println("type: " + new HtmlParser("<form action='http://阿萨德'><input type=text /></form>").form[0].input[0].type);
+   		
+   		HtmlParser h =  new HtmlParser("<html><head><link rel=\"shortcut icon\" /> </head><link rel=\"icon\" href=\"animated_favicon.gif\" type=\"image/gif\" /> </html>");
+   		System.out.println(h.link.length);
+   		System.out.println("href: " + h.link[0].href);
+   		System.out.println(h.link[0].rel);
+   		System.out.println(h.link[1].href);
+   		System.out.println(h.link[1].rel);
+   		
+   		h =  new HtmlParser("<html><head><a href><a href=\"a\"><link rel=\"shortcut icon\" /><a href=\"b\"> </head><link rel=\"icon\" href=\"animated_favicon.gif\" type=\"image/gif\" /> </html>");
+   		System.out.println(h.a.length);
+   		System.out.println("href: " + h.a[0].href);
+   		System.out.println("href: " + h.a[1].href);
+   		System.out.println("href: " + h.a[2].href);
+   		
    		return;
    	}
 }
