@@ -13,7 +13,7 @@ public class ScoreDomain {
 	static Boolean is_white (String host) {
 		for (String s: whilte_list) {
 			if (s.length() == host.length()) {
-				if (host == s) {
+				if (host.equals(s)) {
 					return true;
 				}
 			} else if (s.length() < host.length()) {
