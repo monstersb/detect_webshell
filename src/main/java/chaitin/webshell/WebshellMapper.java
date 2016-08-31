@@ -10,9 +10,9 @@ import com.aliyun.odps.data.Record;
 import com.aliyun.odps.mapred.Mapper;
 import com.aliyun.odps.mapred.TaskContext;
 
-import chaitin.webshell.decoder.Pair;
-import chaitin.webshell.decoder.QueryString;
-import chaitin.webshell.decoder.Unquote;
+import chaitin.decoder.Pair;
+import chaitin.decoder.QueryString;
+import chaitin.decoder.Unquote;
 
 public class WebshellMapper implements Mapper {
 

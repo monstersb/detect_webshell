@@ -3,7 +3,7 @@ package chaitin.phishing;
 import java.util.LinkedList;
 import java.util.List;
 
-import chaitin.webshell.decoder.Pair;
+import chaitin.decoder.Pair;
 
 public class ScoreTitle {
 	static List<Pair<String, Double>> sensitive_word;

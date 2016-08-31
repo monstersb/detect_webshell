@@ -1,4 +1,4 @@
-package chaitin.webshell.decoder;
+package chaitin.decoder;
 
 import java.util.Arrays;
 import java.util.LinkedList;

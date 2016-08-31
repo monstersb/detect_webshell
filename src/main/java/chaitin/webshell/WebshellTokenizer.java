@@ -45,7 +45,6 @@ public class WebshellTokenizer {
 		put("servletactioncontext", 1); 
 		put("streamconnector", 1); 
 		put("system", 1); 
-		//put("try", 1); 
 		put("write", 1); 
 		put("methodaccessor", 1); 
 		put("_cookie", 1); 

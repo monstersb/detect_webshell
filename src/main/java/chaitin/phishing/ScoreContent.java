@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import chaitin.webshell.decoder.Pair;
+import chaitin.decoder.Pair;
 
 public class ScoreContent {
 	static List<Pair<Pattern, Double>> sensitive_word;

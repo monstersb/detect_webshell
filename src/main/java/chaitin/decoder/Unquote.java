@@ -1,4 +1,4 @@
-package chaitin.webshell.decoder;
+package chaitin.decoder;
 
 import java.io.ByteArrayOutputStream;
 import java.util.LinkedList;
@@ -21,6 +21,9 @@ public class Unquote extends Decoder {
                     && isxdigit(input[pos + 2])) {
                 output.write(Unquote.ord(input[pos + 1], input[pos + 2]));
                 pos += 3;
+            } else if (pos < input.length && input[pos] == '+') {
+                output.write(' ');
+                pos += 1;
             } else {
                 output.write(input[pos]);
                 pos += 1;
