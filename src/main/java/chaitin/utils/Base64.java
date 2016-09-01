@@ -1,4 +1,4 @@
-package chaitin.decoder;
+package chaitin.utils;
 
 import java.io.ByteArrayOutputStream;
 import java.util.LinkedList;
@@ -67,6 +67,6 @@ public class Base64 {
     
 
 	public static void main(String[] args) {
-		System.out.println(new String(decode_base64("@@@@".getBytes())));
+		System.out.println(new String(decode_base64("YWJjZA0==".getBytes())));
 	}
 }

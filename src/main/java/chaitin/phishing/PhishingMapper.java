@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 import com.aliyun.odps.data.Record;
 import com.aliyun.odps.mapred.Mapper;
 
-import chaitin.decoder.Pair;
+import chaitin.utils.Pair;
 
 
 public class PhishingMapper implements Mapper {

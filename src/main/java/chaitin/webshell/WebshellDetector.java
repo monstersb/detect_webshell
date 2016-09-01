@@ -7,10 +7,10 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.List;
 
-import chaitin.decoder.Base64;
-import chaitin.decoder.Pair;
-import chaitin.decoder.QueryString;
-import chaitin.decoder.Unquote;
+import chaitin.utils.Base64;
+import chaitin.utils.Pair;
+import chaitin.utils.QueryString;
+import chaitin.utils.Unquote;
 import chaitin.webshell.parser.PhpScore;
 
 public class WebshellDetector {
@@ -20,12 +20,13 @@ public class WebshellDetector {
 	}
     
     public static double score(byte[] payload) {
-    	double score = new PhpScore(payload).score();
-    	byte[] payload_base64 = Base64.decode_base64(payload);
+    	return WebshellTokenizer.scoreTokens(new String(payload));
+    	//double score = new PhpScore(payload).score();
+    	//byte[] payload_base64 = Base64.decode_base64(payload);
     	//System.out.println(new String(payload));
     	//System.out.println(new String(payload_base64));
-    	double score_base64_decoded = new PhpScore(payload_base64).score();
-    	return score > score_base64_decoded ? score : score_base64_decoded;
+    	//double score_base64_decoded = new PhpScore(payload_base64).score();
+    	//return score > score_base64_decoded ? score : score_base64_decoded;
     }
     
 	public static boolean isWebshell(String uri, String data) {
@@ -39,10 +40,10 @@ public class WebshellDetector {
     		if (isSensitiveKey(key) && value.length > 10) {
     		  return true;
     		}
-    		if (score(key) >= 1.5) {
+    		if (score(key) >= 3) {
     			return true;
     		}
-    		if (score(value) >= 1.5) {
+    		if (score(value) >= 3) {
     			return true;
     		}
     	}
@@ -56,10 +57,10 @@ public class WebshellDetector {
 	    		byte[] key = Unquote.unquote(p.first);	    		
 	    		byte[] value = Unquote.unquote(p.second);
 	    		
-	    		if (score(key) >= 1.5) {
+	    		if (score(key) >= 3) {
 	    			return true;
 	    		}
-	    		if (score(value) >= 1.5) {
+	    		if (score(value) >= 3) {
 	    			return true;
 	    		}
 	    	}
@@ -84,7 +85,7 @@ public class WebshellDetector {
     	
 		//String s = "z0=NTYwNjQ4O0Bpbmlfc2V0KCJkaXNwbGF5X2Vycm9ycyIsIjAiKTtAc2V0X3RpbWVfbGltaXQoMCk7QHNldF9tYWdpY19xdW90ZXNfcnVudGltZSgwKTtlY2hvKCItPnwiKTs7ZWNobyBAZndyaXRlKGZvcGVuKGJhc2U2NF9kZWNvZGUoJF9QT1NUWyJ6MSJdKSwidyIpLGJhc2U2NF9kZWNvZGUoJF9QT1NUWyJ6MiJdKSk%";
 		//System.out.println(isWebshell("", s) == true);
-		
+		/*
         BufferedReader br = new BufferedReader(new InputStreamReader(
         new FileInputStream("/tmp/z0.post_data")));
         int c = 0;
@@ -97,7 +98,7 @@ public class WebshellDetector {
             	}
         	}
         }
-        br.close();
+        br.close();*/
 	}
 
 }

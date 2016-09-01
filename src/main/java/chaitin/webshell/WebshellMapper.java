@@ -1,18 +1,9 @@
 package chaitin.webshell;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-
 import com.aliyun.odps.data.Record;
 import com.aliyun.odps.mapred.Mapper;
-import com.aliyun.odps.mapred.TaskContext;
 
-import chaitin.decoder.Pair;
-import chaitin.decoder.QueryString;
-import chaitin.decoder.Unquote;
+import chaitin.utils.Gao;
 
 public class WebshellMapper implements Mapper {
 
@@ -25,11 +16,17 @@ public class WebshellMapper implements Mapper {
 		String id = (String) record.get(0);
 		String uri = (String) record.get(1);
 		String data = (String) record.get(2);
-
-		if (WebshellDetector.isWebshell(uri, data)) {
-			Record result = context.createOutputRecord();
-			result.set("id", id);
-			context.write(result);
+		Boolean result = WebshellDetector.isWebshell(uri, data);
+		if (context != null) {
+			if (result) {
+				Record result_record = context.createOutputRecord();
+				result_record.set("id", id);
+				context.write(result_record);
+			}
+		} else {
+			if (!result.toString().equals(record.get(3))) {
+				Gao.dump(record.toArray());
+			}
 		}
 	}
 

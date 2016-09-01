@@ -1,4 +1,4 @@
-package chaitin.decoder;
+package chaitin.utils;
 
 public class Pair<T1, T2> {
 	

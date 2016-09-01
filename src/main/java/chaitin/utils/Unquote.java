@@ -1,4 +1,4 @@
-package chaitin.decoder;
+package chaitin.utils;
 
 import java.io.ByteArrayOutputStream;
 import java.util.LinkedList;

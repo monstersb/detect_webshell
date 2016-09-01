@@ -1,4 +1,4 @@
-package chaitin.decoder;
+package chaitin.utils;
 
 import java.util.Arrays;
 import java.util.LinkedList;

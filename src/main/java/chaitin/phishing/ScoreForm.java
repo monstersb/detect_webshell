@@ -4,9 +4,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import chaitin.decoder.Pair;
 import chaitin.phishing.HtmlParser.Form;
 import chaitin.phishing.HtmlParser.Form.Input;
+import chaitin.utils.Pair;
 
 public class ScoreForm {
 

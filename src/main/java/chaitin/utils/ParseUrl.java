@@ -1,4 +1,4 @@
-package chaitin.decoder;
+package chaitin.utils;
 
 import java.net.MalformedURLException;
 import java.net.URL;

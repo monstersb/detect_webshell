@@ -14,6 +14,7 @@
                 ( "'" ( ( any - '\\' - "'" ) | ( '\\'  any ) )* "'" ) |
                 ( '"' ( ( any - '\\' - '"' ) | ( '\\'  any ) )* '"' )
              );
+    backtick_string = '`' (any - '`') '`';
     comment = (
                  (
                      ( "//" | '#' ) ( any - '\r' - '\n')* ( '\r' | '\n' )
@@ -29,6 +30,7 @@
               label > { ps = p; } % { score += keyword_score(); }  |
               number |
               string % { score += 0.2; } |
+              backtick_string % { score += 1.0; } |
               comment % { score += 0.2; } |
               '(' > { count_par += 1; } |
               ')' > { if (count_par > 0) { count_par -= 1; } else { black = true; } } |
@@ -65,7 +67,6 @@ public class PhpScore {
     static Map<String, Double> keyword = new HashMap<String, Double>() {
         private static final long serialVersionUID = 6899997024892413801L;
     {
-        put("array_slice", 1.5);
         put("_GET", 1.2);
         put("_POST", 1.3);
         put("_COOKIE", 1.5);
@@ -76,6 +77,7 @@ public class PhpScore {
         put("_SERVER", 1.5);
         put("array_map", 1.4);
         put("assert", 1.4);
+        put("array_slice", 1.5);
         put("base64_decode", 2.0);
         put("call_user_func", 2.0);
         put("call_user_func_array", 2.0);

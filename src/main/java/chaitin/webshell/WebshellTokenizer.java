@@ -1,11 +1,12 @@
 package chaitin.webshell;
 
-import java.util.Base64;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import chaitin.utils.Base64;
 
 public class WebshellTokenizer {
 	
@@ -15,6 +16,7 @@ public class WebshellTokenizer {
 	private static final HashMap<String, Integer> tokenScore = new HashMap<String, Integer>() {
 		private static final long serialVersionUID = 5401942617951940220L;
 	{ 
+		//put("assert", 1); 
 		put("allowstaticmethodaccess", 1); 
 		put("array", 1); 
 		put("array_map", 2); 
@@ -57,6 +59,7 @@ public class WebshellTokenizer {
 	private static final HashMap<String, Integer> dangerousTokenScore = new HashMap<String, Integer>() {
 		private static final long serialVersionUID = 4464369449273331205L;
 	{ 
+		put("assert", 1); 
 		put("allowstaticmethodaccess", 1); 
 		put("base64_decode", 2); 
 		put("create_function", 1); 
@@ -116,12 +119,7 @@ public class WebshellTokenizer {
 	}
 	
 	public static int webShellScore(String input) {
-		String decodedInput = "";
-		try {
-			decodedInput = new String(Base64.getDecoder().decode(input));
-		} catch (Exception e) {
-			decodedInput = "";
-		}
+		String decodedInput = new String(Base64.decode_base64(input.getBytes()));
 		return Math.max(scoreTokens(input), scoreTokens(decodedInput)); 
 	}
 	
@@ -139,7 +137,7 @@ public class WebshellTokenizer {
 		
 		System.out.println(1 + (Integer)tokenScore.get("eval"));
 		try {
-			System.out.println(new String(Base64.getDecoder().decode("NzU3MjIyO0Bpbmlfc2V0KCJkaXNwbGF5X2Vycm9ycyIsIjAiKTtAc2V0X3RpbWVfbGltaXQoMCk7QHNldF9tYWdpY19xdW90ZXNfcnVudGltZSgwKTtlY2hvKCItPnwiKTs7ZWNobyBAZndyaXRlKGZvcGVuKGJhc2U2NF9kZWNvZGUoJF9QT1NUWyJ6MSJdKSwidyIpLGJhc2fjkdsalfjas8*&(*2NF9kZWNvZGUoJF9QT1NUWyJ6MiJdKSk/IjEiOiIwIjtlY2hvKCJ8PC0iKTs7ZGllKCk7")));
+			//System.out.println(new String(Base64.getDecoder().decode("NzU3MjIyO0Bpbmlfc2V0KCJkaXNwbGF5X2Vycm9ycyIsIjAiKTtAc2V0X3RpbWVfbGltaXQoMCk7QHNldF9tYWdpY19xdW90ZXNfcnVudGltZSgwKTtlY2hvKCItPnwiKTs7ZWNobyBAZndyaXRlKGZvcGVuKGJhc2U2NF9kZWNvZGUoJF9QT1NUWyJ6MSJdKSwidyIpLGJhc2fjkdsalfjas8*&(*2NF9kZWNvZGUoJF9QT1NUWyJ6MiJdKSk/IjEiOiIwIjtlY2hvKCJ8PC0iKTs7ZGllKCk7")));
 		} catch (Exception e) {
 			System.out.println("error");
 		}
