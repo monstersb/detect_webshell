@@ -7,6 +7,8 @@ import chaitin.utils.Gao;
 
 public class WebshellMapper implements Mapper {
 
+	public double _tp, _fp, _fn;
+	
     public void setup(TaskContext context) throws IOException {
     	
     }
@@ -24,6 +26,20 @@ public class WebshellMapper implements Mapper {
 				context.write(result_record);
 			}
 		} else {
+			if (!record.get(3).toString().equals("true") && !record.get(3).toString().equals("false")) {
+				System.out.println("err! ");
+				System.exit(0);
+			}
+			if (result.toString().equals("true") && record.get(3).toString().equals("true")) {
+				_tp += 1;
+			}
+			if (result.toString().equals("true") && record.get(3).toString().equals("false")) {
+				_fp += 1;
+			}
+			if (result.toString().equals("false") && record.get(3).toString().equals("true")) {
+				_fn += 1;
+			}
+			
 			if (!result.toString().equals(record.get(3))) {
 				Gao.dump(record.toArray());
 			}

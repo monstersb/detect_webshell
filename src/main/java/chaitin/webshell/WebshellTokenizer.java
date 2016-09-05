@@ -17,8 +17,8 @@ public class WebshellTokenizer {
 		private static final long serialVersionUID = 5401942617951940220L;
 	{ 
 		//put("assert", 1); 
-		put("allowstaticmethodaccess", 1); 
-		put("array", 1); 
+		//put("allowstaticmethodaccess", 1); 
+		//put("array", 1); 
 		put("array_map", 2); 
 		put("base64_decode", 2); 
 		put("catch", 1); 

@@ -1,6 +1,7 @@
 package chaitin.utils;
 
 import java.io.ByteArrayOutputStream;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -26,6 +27,33 @@ public class Base64 {
     	} else {
     		return (byte)0xFF;
     	}
+    }
+
+    
+    public static boolean is_alpha(byte c) {
+    	return Character.isUpperCase(c) 
+    			|| Character.isLowerCase(c)
+    			|| Character.isDigit(c) 
+    			|| c == '+'
+    			|| c == '/'
+    			|| c == '=';
+    }
+    
+    public static byte[] longest_sub_base64(byte[] input) {
+    	if (input.length == 0) {
+    		return input;
+    	}
+    	int max = 0;
+    	int[] result = new int[input.length];
+    	result[0] = is_alpha(input[0]) ? 1 : 0;
+    	for (int i = 1; i < input.length; ++i) {
+        	result[i] = is_alpha(input[i]) ? result[i - 1] + 1 : 0;
+        	if (result[i] > result[max]) {
+        		max = i;
+        	}
+    	}
+    	
+    	return Arrays.copyOfRange(input, max - result[max] + 1, max + 1);
     }
     
     public static byte[] decode_base64(byte[] input) {
@@ -68,5 +96,6 @@ public class Base64 {
 
 	public static void main(String[] args) {
 		System.out.println(new String(decode_base64("YWJjZA0==".getBytes())));
+		System.out.println(new String(longest_sub_base64("!@#$test---123456".getBytes())));
 	}
 }
